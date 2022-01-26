@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Microsoft.Research.ICE.UserInterface.CameraMotionSettings" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:converters="clr-namespace:Microsoft.Research.ICE.Converters" xmlns:toolkit="clr-namespace:Microsoft.Research.VisionTools.Toolkit.Desktop;assembly=Microsoft.Research.VisionTools.Toolkit.Desktop">
+  <UserControl.Resources>
+    <converters:ObjectToBooleanConverter x:Key="objectToBooleanConverter" />
+  </UserControl.Resources>
+  <GroupBox Header="Camera motion">
+    <toolkit:IconComboBox>
+      <toolkit:IconComboBoxItem ContentControl.Content="Auto-detect" IconBrush="{DynamicResource IconCameraMotionAuto}" ListBoxItem.IsSelected="{Binding PreferredMotionModel, ConverterParameter=Automatic, Converter={StaticResource objectToBooleanConverter}, FallbackValue=True}" />
+      <toolkit:IconComboBoxItem ContentControl.Content="Planar motion" IconBrush="{DynamicResource IconCameraMotionPlanar}" ListBoxItem.IsSelected="{Binding PreferredMotionModel, ConverterParameter=RigidScale, Converter={StaticResource objectToBooleanConverter}}" />
+      <toolkit:IconComboBoxItem ContentControl.Content="Planar motion with skew" IconBrush="{DynamicResource IconCameraMotionSkew}" ListBoxItem.IsSelected="{Binding PreferredMotionModel, ConverterParameter=Affine, Converter={StaticResource objectToBooleanConverter}}" />
+      <toolkit:IconComboBoxItem ContentControl.Content="Planar motion with perspective" IconBrush="{DynamicResource IconCameraMotionPerspective}" ListBoxItem.IsSelected="{Binding PreferredMotionModel, ConverterParameter=Homography, Converter={StaticResource objectToBooleanConverter}}" />
+      <toolkit:IconComboBoxItem ContentControl.Content="Rotating motion" IconBrush="{DynamicResource IconCameraMotionPivot}" ListBoxItem.IsSelected="{Binding PreferredMotionModel, ConverterParameter=Rotation3D, Converter={StaticResource objectToBooleanConverter}}" />
+    </toolkit:IconComboBox>
+  </GroupBox>
+</UserControl>

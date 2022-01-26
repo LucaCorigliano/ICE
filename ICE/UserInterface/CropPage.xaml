@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Microsoft.Research.ICE.UserInterface.CropPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:controls="clr-namespace:Microsoft.Research.ICE.Controls" xmlns:converters="clr-namespace:Microsoft.Research.ICE.Converters" xmlns:panoViewing="clr-namespace:Microsoft.Research.ICE.PanoViewing;assembly=StitchEngine" xmlns:toolkit="clr-namespace:Microsoft.Research.VisionTools.Toolkit.Desktop;assembly=Microsoft.Research.VisionTools.Toolkit.Desktop" xmlns:userInterface="clr-namespace:Microsoft.Research.ICE.UserInterface">
+  <UserControl.Resources>
+    <converters:LogarithmicConverter x:Key="logarithmicConverter" />
+  </UserControl.Resources>
+  <Grid Margin="20,20,20,10">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="20" />
+      <ColumnDefinition Width="280" />
+    </Grid.ColumnDefinitions>
+    <toolkit:ContentBorder Name="panoViewerBorder" Grid.Row="2" UIElement.SnapsToDevicePixels="True">
+      <controls:PanoCropEditor x:Name="panoViewer" panoViewing:PanoViewer.Projection="Orthographic" panoViewing:PanoViewer.PanoRenderInfoPointer="{Binding ProjectedPanoRenderInfoPointer}" panoViewing:PanoViewer.XTranslation="{Binding XTranslation}" panoViewing:PanoViewer.YTranslation="{Binding YTranslation}" panoViewing:PanoViewer.Zoom="{Binding Zoom}" panoViewing:PanoViewer.ShouldZoomToFit="{Binding ShouldZoomToFit}" panoViewing:PanoViewer.ShowCompletion="{Binding ShowCompletion}" />
+    </toolkit:ContentBorder>
+    <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" SnapsToDevicePixels="True">
+      <toolkit:IconButton FrameworkElement.ToolTip="Zoom out (Ctrl+-)" ButtonBase.Command="userInterface:Commands.ZoomOut" FrameworkElement.VerticalAlignment="Center" IconBrush="{DynamicResource IconMinusBrush}" />
+      <Slider Width="100" VerticalAlignment="Center" Margin="5,0,0,0" Minimum="{Binding ElementName=panoViewer, Path=MinZoom, Converter={StaticResource logarithmicConverter}}" Maximum="{Binding ElementName=panoViewer, Path=MaxZoom, Converter={StaticResource logarithmicConverter}}" SmallChange="{Binding ElementName=panoViewer, Path=ZoomFactor, Converter={StaticResource logarithmicConverter}}" LargeChange="{Binding ElementName=panoViewer, Path=ZoomFactor, Converter={StaticResource logarithmicConverter}}" Value="{Binding Zoom, Converter={StaticResource logarithmicConverter}}" />
+      <toolkit:IconButton FrameworkElement.ToolTip="Zoom in (Ctrl+=)" ButtonBase.Command="userInterface:Commands.ZoomIn" FrameworkElement.VerticalAlignment="Center" FrameworkElement.Margin="5,0,0,0" IconBrush="{DynamicResource IconPlusBrush}" />
+      <toolkit:IconButton FrameworkElement.ToolTip="Fit to window (Ctrl+0)" ButtonBase.Command="userInterface:Commands.ZoomToFit" FrameworkElement.VerticalAlignment="Center" FrameworkElement.Margin="5,0,0,0" IconBrush="{DynamicResource IconFitWindowBrush}" />
+    </StackPanel>
+    <StackPanel Grid.Column="2">
+      <GroupBox Header="Image completion">
+        <StackPanel>
+          <Button Content="Auto complete" HorizontalAlignment="Left" Command="{Binding AutoCompleteCommand}" />
+          <CheckBox Content="Use auto completion" Margin="0,10,0,0" HorizontalAlignment="Left" IsChecked="{Binding ShowCompletion}" IsEnabled="{Binding CanShowCompletion}" />
+        </StackPanel>
+      </GroupBox>
+      <GroupBox Header="Crop" Margin="0,10,0,0">
+        <Grid Grid.IsSharedSizeScope="True">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="15" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <StackPanel Orientation="Horizontal" Grid.ColumnSpan="3" HorizontalAlignment="Left">
+            <Button Content="Auto crop" Command="{Binding AutoCropCommand}" />
+            <Button Content="No crop" Margin="10,0,0,0" Command="{Binding NoCropCommand}" />
+          </StackPanel>
+          <Grid HorizontalAlignment="Left" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition SharedSizeGroup="leftLabelColumn" />
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="50" />
+              <ColumnDefinition Width="2" />
+              <ColumnDefinition SharedSizeGroup="unitColumn" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Left" VerticalAlignment="Center" Target="{Binding ElementName=leftCropTextBox}" />
+            <toolkit:TextBoxPlus Name="leftCropTextBox" Grid.Column="2" FrameworkElement.VerticalAlignment="Center" Control.HorizontalContentAlignment="Right" TextBox.Text="{Binding CropLeft}" />
+            <Label Content="pixels" Grid.Column="4" VerticalAlignment="Center" />
+          </Grid>
+          <Grid HorizontalAlignment="Left" Grid.Row="2" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition SharedSizeGroup="rightLabelColumn" />
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="50" />
+              <ColumnDefinition Width="2" />
+              <ColumnDefinition SharedSizeGroup="unitColumn" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Top" VerticalAlignment="Center" Grid.Row="2" Target="{Binding ElementName=topCropTextBox}" />
+            <toolkit:TextBoxPlus Name="topCropTextBox" Grid.Column="2" FrameworkElement.VerticalAlignment="Center" Control.HorizontalContentAlignment="Right" Grid.Row="2" TextBox.Text="{Binding CropTop}" />
+            <Label Content="pixels" Grid.Column="4" VerticalAlignment="Center" Grid.Row="2" />
+          </Grid>
+          <Grid HorizontalAlignment="Left" Grid.Row="4">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition SharedSizeGroup="leftLabelColumn" />
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="50" />
+              <ColumnDefinition Width="2" />
+              <ColumnDefinition SharedSizeGroup="unitColumn" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Width" VerticalAlignment="Center" Target="{Binding ElementName=widthCropTextBox}" />
+            <toolkit:TextBoxPlus Name="widthCropTextBox" Grid.Column="2" FrameworkElement.VerticalAlignment="Center" Control.HorizontalContentAlignment="Right" TextBox.Text="{Binding CropWidth}" />
+            <Label Content="pixels" Grid.Column="4" VerticalAlignment="Center" />
+          </Grid>
+          <Grid HorizontalAlignment="Left" Grid.Row="4" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition SharedSizeGroup="rightLabelColumn" />
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="50" />
+              <ColumnDefinition Width="2" />
+              <ColumnDefinition SharedSizeGroup="unitColumn" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Height" VerticalAlignment="Center" Grid.Row="2" Target="{Binding ElementName=heightCropTextBox}" />
+            <toolkit:TextBoxPlus Name="heightCropTextBox" Grid.Column="2" FrameworkElement.VerticalAlignment="Center" Control.HorizontalContentAlignment="Right" Grid.Row="2" TextBox.Text="{Binding CropHeight}" />
+            <Label Content="pixels" Grid.Column="4" VerticalAlignment="Center" Grid.Row="2" />
+          </Grid>
+          <Grid HorizontalAlignment="Left" Grid.Row="6">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition SharedSizeGroup="leftLabelColumn" />
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="50" />
+              <ColumnDefinition Width="2" />
+              <ColumnDefinition SharedSizeGroup="unitColumn" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Right" VerticalAlignment="Center" Target="{Binding ElementName=rightCropTextBox}" />
+            <toolkit:TextBoxPlus Name="rightCropTextBox" Grid.Column="2" FrameworkElement.VerticalAlignment="Center" Control.HorizontalContentAlignment="Right" TextBox.Text="{Binding CropRight}" />
+            <Label Content="pixels" Grid.Column="4" VerticalAlignment="Center" />
+          </Grid>
+          <Grid HorizontalAlignment="Left" Grid.Row="6" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition SharedSizeGroup="rightLabelColumn" />
+              <ColumnDefinition Width="5" />
+              <ColumnDefinition Width="50" />
+              <ColumnDefinition Width="2" />
+              <ColumnDefinition SharedSizeGroup="unitColumn" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Bottom" VerticalAlignment="Center" Grid.Row="2" Target="{Binding ElementName=bottomCropTextBox}" />
+            <toolkit:TextBoxPlus Name="bottomCropTextBox" Grid.Column="2" FrameworkElement.VerticalAlignment="Center" Control.HorizontalContentAlignment="Right" Grid.Row="2" TextBox.Text="{Binding CropBottom}" />
+            <Label Content="pixels" Grid.Column="4" VerticalAlignment="Center" Grid.Row="2" />
+          </Grid>
+        </Grid>
+      </GroupBox>
+    </StackPanel>
+  </Grid>
+</UserControl>

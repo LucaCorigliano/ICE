@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Microsoft.Research.ICE.Controls.CropBox" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
+  <Canvas Name="canvas">
+    <Grid Name="gridCropBox" SnapsToDevicePixels="True" Width="200" Height="100" Canvas.Left="50" Canvas.Top="50">
+      <Grid.Resources>
+        <ResourceDictionary>
+          <ControlTemplate x:Key="thumbTemplate">
+            <Grid Width="0" Height="0">
+              <Rectangle Height="21" Width="21" Margin="-21" Fill="#00FFFFFF" HorizontalAlignment="{TemplateBinding FrameworkElement.HorizontalAlignment}" VerticalAlignment="{TemplateBinding FrameworkElement.VerticalAlignment}" />
+              <Rectangle Height="8" Width="8" Margin="-8" Stroke="#FF000000" StrokeThickness="1" Fill="#FFFFFFFF" HorizontalAlignment="{TemplateBinding FrameworkElement.HorizontalAlignment}" VerticalAlignment="{TemplateBinding FrameworkElement.VerticalAlignment}" />
+            </Grid>
+          </ControlTemplate>
+          <ControlTemplate x:Key="rectangleTemplate" TargetType="{x:Type Thumb}">
+            <Grid>
+              <Rectangle Stroke="#00FFFFFF" StrokeThickness="23" Margin="-13" Fill="{TemplateBinding Control.Background}" />
+              <Rectangle Stroke="#FF000000" StrokeThickness="3" Margin="-3" />
+              <Rectangle Stroke="#FFFFFFFF" StrokeThickness="1" Margin="-2" />
+            </Grid>
+          </ControlTemplate>
+        </ResourceDictionary>
+      </Grid.Resources>
+      <Thumb Name="moveThumb" Cursor="SizeAll" Template="{StaticResource rectangleTemplate}" Background="{x:Null}" DragDelta="RectangleMove" PreviewMouseLeftButtonDown="MoveThumb_PreviewMouseLeftButtonDown" />
+      <Thumb Name="thumb1" Cursor="SizeNWSE" Template="{StaticResource thumbTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top" DragDelta="ThumbMove" />
+      <Thumb Name="thumb2" Cursor="SizeNS" Template="{StaticResource thumbTemplate}" VerticalAlignment="Top" HorizontalAlignment="Center" DragDelta="ThumbMove" />
+      <Thumb Name="thumb3" Cursor="SizeNESW" Template="{StaticResource thumbTemplate}" VerticalAlignment="Top" HorizontalAlignment="Right" DragDelta="ThumbMove" />
+      <Thumb Name="thumb4" Cursor="SizeWE" Template="{StaticResource thumbTemplate}" VerticalAlignment="Center" HorizontalAlignment="Left" DragDelta="ThumbMove" />
+      <Thumb Name="thumb5" Cursor="SizeWE" Template="{StaticResource thumbTemplate}" VerticalAlignment="Center" HorizontalAlignment="Right" DragDelta="ThumbMove" />
+      <Thumb Name="thumb6" Cursor="SizeNESW" Template="{StaticResource thumbTemplate}" VerticalAlignment="Bottom" HorizontalAlignment="Left" DragDelta="ThumbMove" />
+      <Thumb Name="thumb7" Cursor="SizeNS" Template="{StaticResource thumbTemplate}" VerticalAlignment="Bottom" HorizontalAlignment="Center" DragDelta="ThumbMove" />
+      <Thumb Name="thumb8" Cursor="SizeNWSE" Template="{StaticResource thumbTemplate}" VerticalAlignment="Bottom" HorizontalAlignment="Right" DragDelta="ThumbMove" />
+    </Grid>
+  </Canvas>
+</UserControl>

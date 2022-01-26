@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application x:Class="Microsoft.Research.ICE.UserInterface.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Controls="clr-namespace:Microsoft.Research.ICE.Controls" StartupUri="MainWindow.xaml">
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Microsoft.Research.VisionTools.Toolkit.Desktop;component/Brushes/Brushes.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Microsoft.Research.VisionTools.Toolkit.Desktop;component/Brushes/IconBrushes.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Microsoft.Research.VisionTools.Toolkit.Desktop;component/Styles/Styles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/ICE;component/UserInterface/IconBrushes.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <SolidColorBrush x:Key="HandleListBoxItem.Normal.Foreground" Color="{StaticResource Color.Foreground.VeryDark}" />
+      <SolidColorBrush x:Key="HandleListBoxItem.MouseOver.Foreground" Color="{StaticResource Color.Accent.Medium}" />
+      <SolidColorBrush x:Key="HandleListBoxItem.Selected.Foreground" Color="{StaticResource Color.Accent.Light}" />
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>

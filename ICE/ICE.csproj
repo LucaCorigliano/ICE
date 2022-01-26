@@ -1,0 +1,480 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ProjectGuid>{9F98AC79-0843-48B9-A5DC-F757D86646B1}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <AssemblyName>ICE</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>Microsoft.Research.ICE</RootNamespace>
+    <StartupObject>
+    </StartupObject>
+    <ApplicationIcon>window.ico</ApplicationIcon>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <Optimize>false</Optimize>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>ref\Microsoft.WindowsAPICodePack.DLL</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="Microsoft.Research.VisionTools.Toolkit.Desktop, Version=1.0.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>ref\Microsoft.Research.VisionTools.Toolkit.Desktop.DLL</HintPath>
+    </Reference>
+    <Reference Include="StitchEngine, Version=2.0.3.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>ref\StitchEngine.DLL</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="Microsoft.Research.VisionTools.Toolkit, Version=1.0.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>ref\Microsoft.Research.VisionTools.Toolkit.DLL</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>ref\Newtonsoft.Json.DLL</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>ref\Microsoft.WindowsAPICodePack.Shell.DLL</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xml" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <Compile Include="Helpers\SystemProperties.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\ObjectToVisibilityConverter.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\SettingsChangedEventArgs.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\BooleanToStringConverter.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\NamedPreset.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\TaskViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\NavigationState.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\CacheLocationViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UserInterface\Commands.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\ObjectToBooleanConverter.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\BooleanToDoubleConverter.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Helpers\DragDropHelper.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\LogarithmicConverter.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\BooleanToInt32Converter.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Helpers\XmlHelper.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Helpers\ImagesDroppedCallback.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\BooleanToBrushConverter.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Helpers\ImagesOrVideoOrProjectDroppedCallback.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\EnumToIntConverter.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Helpers\LinkHelper.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Helpers\CommandBindingHelper.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\TaskProgressConverter.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\NamedPresetViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\WelcomeViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Helpers\ZoomHelper.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\CompressionQualityViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Helpers\MathHelper.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Helpers\AngleUnit.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\NamedValue.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\TilesetExportViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\CompressionQualityPreset.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\TaskState.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Helpers\UserAgentHelper.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\HelpViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\ExportViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\SourceFileViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\OptionsViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\VideoRectangleViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\ZipArchiveSizeViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UserInterface\CropPage.xaml.cs">
+      <DependentUpon>CropPage.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UserInterface\TestPage.xaml.cs">
+      <DependentUpon>TestPage.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UserInterface\WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\ImageExportViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UserInterface\ExportPage.xaml.cs">
+      <DependentUpon>ExportPage.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\ImageExportFormatViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UserInterface\ImportPage.xaml.cs">
+      <DependentUpon>ImportPage.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\VideoImportViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\BitmapImageConverter.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\BooleanConverter.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\NegatedBooleanConverter.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\StructuredImportViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\TaskPurpose.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UserInterface\StitchPage.xaml.cs">
+      <DependentUpon>StitchPage.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ImportViews\StructuredImportView.xaml.cs">
+      <DependentUpon>StructuredImportView.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UserInterface\StructuredPanoramaSettings.xaml.cs">
+      <DependentUpon>StructuredPanoramaSettings.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ImportViews\UnstructuredImportView.xaml.cs">
+      <DependentUpon>UnstructuredImportView.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Helpers\StitchProjectFile.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UserInterface\App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ImportViews\VideoImportView.xaml.cs">
+      <DependentUpon>VideoImportView.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Helpers\FileHelper.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\FirstOrSecondButNotThirdBooleanConverter.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Converters\ScaleConverter.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UserInterface\CameraMotionSettings.xaml.cs">
+      <DependentUpon>CameraMotionSettings.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\MainViewModel.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\DirtyFlags.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\ExportMode.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\SortOrder.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\ExportCompletedEventArgs.cs">
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+    </Compile>
+    <ApplicationDefinition Include="UserInterface\App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <None Include="app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Page Include="UserInterface\CropPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserInterface\TestPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserInterface\WelcomePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserInterface\ExportPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserInterface\ImportPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserInterface\StitchPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImportViews\StructuredImportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserInterface\StructuredPanoramaSettings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImportViews\UnstructuredImportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImportViews\VideoImportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserInterface\CameraMotionSettings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <!-- Controls -->
+    <Compile Include="Controls\FilePicker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\FolderPicker.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\GridLineRenderer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Controls\ProgressView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Controls\ProgressView.xaml.cs">
+      <SubType>Code</SubType>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <DependentUpon>ProgressView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="UserInterface\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="UserInterface\MainWindow.xaml.cs">
+      <SubType>Code</SubType>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\MessageDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Controls\MessageDialog.xaml.cs">
+      <SubType>Code</SubType>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <DependentUpon>MessageDialog.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\HelpDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Controls\HelpDialog.xaml.cs">
+      <SubType>Code</SubType>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <DependentUpon>HelpDialog.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\OptionsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Controls\OptionsDialog.xaml.cs">
+      <SubType>Code</SubType>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <DependentUpon>OptionsDialog.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\PanoOrientationEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Controls\PanoOrientationEditor.xaml.cs">
+      <SubType>Code</SubType>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <DependentUpon>PanoOrientationEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StructuredPanoramaImage.xaml.cs">
+      <DependentUpon>StructuredPanoramaImage.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\CropBox.xaml.cs">
+      <DependentUpon>CropBox.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\VideoRectangleOverlay.xaml.cs">
+      <DependentUpon>VideoRectangleOverlay.xaml</DependentUpon>
+      <DesignTimeSharedInput>false</DesignTimeSharedInput>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Controls\StructuredPanoramaImage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CropBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\VideoRectangleOverlay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\PanoCropEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="Images\logoice.png" />
+    <Resource Include="Images\window.ico" />
+    <Resource Include="Images\aboutbanner.png" />
+    <Resource Include="Cursors\grabbing.cur" />
+    <Resource Include="Cursors\topright.cur" />
+    <Resource Include="Cursors\grab.cur" />
+    <Resource Include="Cursors\horizontal.cur" />
+    <Resource Include="Cursors\bottomleft.cur" />
+    <Resource Include="Cursors\topleft.cur" />
+    <Resource Include="Cursors\vertical.cur" />
+    <Resource Include="Cursors\bottomright.cur" />
+    <Resource Include="UserInterface\IconBrushes.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="window.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

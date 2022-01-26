@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<toolkit:ToolkitWindow x:Class="Microsoft.Research.ICE.UserInterface.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:controls="clr-namespace:Microsoft.Research.ICE.Controls" xmlns:converters="clr-namespace:Microsoft.Research.ICE.Converters" xmlns:toolkit="clr-namespace:Microsoft.Research.VisionTools.Toolkit.Desktop;assembly=Microsoft.Research.VisionTools.Toolkit.Desktop" xmlns:userInterface="clr-namespace:Microsoft.Research.ICE.UserInterface" x:Name="window" Icon="/Images/Window.ico" MinWidth="1120" MinHeight="784" AllowDrop="True" Title="{Binding WindowTitle}">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <converters:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+      <converters:NegatedBooleanConverter x:Key="negatedBooleanConverter" />
+      <converters:TaskProgressConverter x:Key="taskProgressConverter" />
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <Window.TaskbarItemInfo>
+    <TaskbarItemInfo ProgressState="{Binding TaskProgressState}" ProgressValue="{Binding TaskProgress, Converter={StaticResource taskProgressConverter}}" Description="{Binding WindowTitle}" />
+  </Window.TaskbarItemInfo>
+  <toolkit:ToolkitWindow.TitleBarExtraLeft>
+    <StackPanel Orientation="Horizontal">
+      <Button Command="userInterface:Commands.NewImagePanorama" ToolTip="New panorama from images (Ctrl+N)">
+        <Rectangle Fill="{DynamicResource IconNewFromPhotosBrush}" Width="16" Height="16" />
+      </Button>
+      <Button Command="userInterface:Commands.NewVideoPanorama" ToolTip="New panorama from video (Ctrl+Shift+N)">
+        <Rectangle Fill="{DynamicResource IconNewFromVideoBrush}" Width="16" Height="16" />
+      </Button>
+      <Button Command="Open" ToolTip="Open existing panorama (Ctrl+O)">
+        <Rectangle Fill="{DynamicResource IconOpenPanoramaBrush}" Width="16" Height="16" />
+      </Button>
+      <Button Command="Save" ToolTip="Save panorama (Ctrl+S)">
+        <Rectangle Fill="{DynamicResource IconSaveBrush}" Width="16" Height="16" />
+      </Button>
+      <Button Command="SaveAs" ToolTip="Save panorama as (Ctrl+Shift+S)">
+        <Rectangle Fill="{DynamicResource IconSaveAsBrush}" Width="16" Height="16" />
+      </Button>
+    </StackPanel>
+  </toolkit:ToolkitWindow.TitleBarExtraLeft>
+  <toolkit:ToolkitWindow.TitleBarExtraRight>
+    <StackPanel Orientation="Horizontal">
+      <Button Name="optionsButton" Command="userInterface:Commands.Options" ToolTip="Options">
+        <Rectangle Fill="{DynamicResource IconOptionsBrush}" Width="16" Height="16" />
+      </Button>
+      <Button Name="helpButton" Command="Help" ToolTip="Help (F1)">
+        <Rectangle Fill="{DynamicResource IconHelpBrush}" Width="16" Height="16" />
+      </Button>
+    </StackPanel>
+  </toolkit:ToolkitWindow.TitleBarExtraRight>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <toolkit:ChevronNavigation BackCommand="BrowseBack" NextCommand="BrowseForward" NavigationItems="{Binding NavigationItems}" SelectedItem="{Binding NavigationState}" NavigationCommand="{Binding GoToStateCommand}" Visibility="{Binding HasSomeSourceFiles, Converter={StaticResource booleanToVisibilityConverter}, FallbackValue=Collapsed}" />
+    <Border Name="contentHolder" Grid.Row="1" IsEnabled="{Binding HasTask, Converter={StaticResource negatedBooleanConverter}}">
+      <userInterface:WelcomePage />
+    </Border>
+    <controls:ProgressView Grid.Row="1" Background="#FF202020" Visibility="{Binding HasTask, Converter={StaticResource booleanToVisibilityConverter}, FallbackValue=Collapsed}" />
+  </Grid>
+</toolkit:ToolkitWindow>

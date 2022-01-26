@@ -1,0 +1,16 @@
+<panoViewing:PanoViewer x:Class="Microsoft.Research.ICE.Controls.PanoCropEditor"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:panoViewing="clr-namespace:Microsoft.Research.ICE.PanoViewing;assembly=StitchEngine"
+                        xmlns:controls="clr-namespace:Microsoft.Research.ICE.Controls"
+                        xmlns:D3DCore="clr-namespace:Microsoft.Research.D3DCore;assembly=StitchEngine"
+                        ClipToBounds="true">
+    <D3DCore:D3DElement.Overlay>
+    <controls:CropBox CropLeft="{Binding CropLeft}" CropTop="{Binding CropTop}" CropRight="{Binding CropRightPosition}"
+                      CropBottom="{Binding CropBottomPosition}" BitmapWidth="{Binding FullWidth}"
+                      BitmapHeight="{Binding FullHeight}"
+                      ViewerTransformMatrix="{Binding RelativeSource={RelativeSource AncestorType={x:Type panoViewing:PanoViewer}}, Path=TransformMatrix}"/>
+  </D3DCore:D3DElement.Overlay>
+</panoViewing:PanoViewer>

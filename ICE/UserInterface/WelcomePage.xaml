@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Microsoft.Research.ICE.UserInterface.WelcomePage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:controls="clr-namespace:Microsoft.Research.ICE.Controls" xmlns:globalization="clr-namespace:System.Globalization;assembly=mscorlib" xmlns:toolkit="clr-namespace:Microsoft.Research.VisionTools.Toolkit.Desktop;assembly=Microsoft.Research.VisionTools.Toolkit.Desktop" xmlns:userInterface="clr-namespace:Microsoft.Research.ICE.UserInterface">
+  <UserControl.Resources>
+    <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+    <SolidColorBrush x:Key="AccentText.Foreground" Color="{StaticResource Color.Accent.Light}" />
+    <Style x:Key="headerTextBlockStyle" TargetType="{x:Type TextBlock}">
+      <Setter Property="TextBlock.Foreground" Value="{StaticResource AccentText.Foreground}" />
+      <Setter Property="TextBlock.FontWeight" Value="Light" />
+      <Setter Property="TextBlock.FontSize" Value="23" />
+      <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+    </Style>
+    <Style x:Key="panoramaButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+      <Setter Property="FrameworkElement.Width" Value="360" />
+      <Setter Property="FrameworkElement.Height" Value="90" />
+      <Setter Property="Control.Background" Value="#00FFFFFF" />
+      <Setter Property="FrameworkElement.Cursor" Value="Hand" />
+      <Setter Property="FrameworkElement.Margin" Value="0" />
+      <Setter Property="Control.Padding" Value="5" />
+      <Setter Property="FrameworkElement.FocusVisualStyle" Value="{DynamicResource FocusVisualStyle.Inner.Light}" />
+      <Setter Property="Control.Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border Name="border" Background="{TemplateBinding Control.Background}" Padding="{TemplateBinding Control.Padding}">
+              <ContentPresenter />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="UIElement.IsMouseOver" Value="True">
+                <Setter Property="Control.Background" Value="#11FFFFFF" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <SolidColorBrush x:Key="Thumbnail.Background" Color="{StaticResource Color.Background.Dark}" />
+ 
+  </UserControl.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <toolkit:Banner>
+      <toolkit:BannerButton AutomationProperties.Name="New panorama from images" ContentControl.Content="New Panorama" Subtitle="From Images" ButtonBase.Command="userInterface:Commands.NewImagePanorama" IconBrush="{DynamicResource IconNewFromPhotosBrush}" />
+      <toolkit:BannerButton AutomationProperties.Name="New panorama from video" ContentControl.Content="New Panorama" Subtitle="From Video" ButtonBase.Command="userInterface:Commands.NewVideoPanorama" IconBrush="{DynamicResource IconNewFromVideoBrush}" ToolTipService.ShowOnDisabled="True">
+        <FrameworkElement.Style>
+          <Style TargetType="{x:Type toolkit:BannerButton}">
+            <Style.Triggers>
+              <Trigger Property="UIElement.IsEnabled" Value="False">
+                <Setter Property="FrameworkElement.ToolTip" Value="Panorama from video is available only on Windows 7 and newer" />
+              </Trigger>
+            </Style.Triggers>
+          </Style>
+        </FrameworkElement.Style>
+      </toolkit:BannerButton>
+      <toolkit:BannerButton AutomationProperties.Name="Open existing panorama" ContentControl.Content="Open" Subtitle="Existing Panorama" ButtonBase.Command="Open" IconBrush="{DynamicResource IconOpenPanoramaBrush}" />
+    </toolkit:Banner>
+    </Grid>
+</UserControl>

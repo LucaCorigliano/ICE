@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Microsoft.Research.ICE.Controls.StructuredPanoramaImage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Grid Background="#FF666666">
+    <Image Name="image" Stretch="Fill" />
+    <Border Name="border" BorderBrush="{StaticResource ListBoxItem.SelectedActive.Background}" BorderThickness="0" Visibility="Collapsed" />
+    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="#40000000" RenderTransform="1 0 0 1 -1 -1" Text="{Binding ElementName=label, Path=Text}" TextBlock.FontSize="{Binding ElementName=label, Path=FontSize}" Visibility="{Binding ElementName=label, Path=Visibility}" />
+    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="#40000000" RenderTransform="1 0 0 1 1 -1" Text="{Binding ElementName=label, Path=Text}" TextBlock.FontSize="{Binding ElementName=label, Path=FontSize}" Visibility="{Binding ElementName=label, Path=Visibility}" />
+    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="#40000000" RenderTransform="1 0 0 1 1 1" Text="{Binding ElementName=label, Path=Text}" TextBlock.FontSize="{Binding ElementName=label, Path=FontSize}" Visibility="{Binding ElementName=label, Path=Visibility}" />
+    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="#40000000" RenderTransform="1 0 0 1 -1 1" Text="{Binding ElementName=label, Path=Text}" TextBlock.FontSize="{Binding ElementName=label, Path=FontSize}" Visibility="{Binding ElementName=label, Path=Visibility}" />
+    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="#80000000" RenderTransform="1 0 0 1 -1 0" Text="{Binding ElementName=label, Path=Text}" TextBlock.FontSize="{Binding ElementName=label, Path=FontSize}" Visibility="{Binding ElementName=label, Path=Visibility}" />
+    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="#80000000" RenderTransform="1 0 0 1 1 0" Text="{Binding ElementName=label, Path=Text}" TextBlock.FontSize="{Binding ElementName=label, Path=FontSize}" Visibility="{Binding ElementName=label, Path=Visibility}" />
+    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="#80000000" RenderTransform="1 0 0 1 0 -1" Text="{Binding ElementName=label, Path=Text}" TextBlock.FontSize="{Binding ElementName=label, Path=FontSize}" Visibility="{Binding ElementName=label, Path=Visibility}" />
+    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="#80000000" RenderTransform="1 0 0 1 0 1" Text="{Binding ElementName=label, Path=Text}" TextBlock.FontSize="{Binding ElementName=label, Path=FontSize}" Visibility="{Binding ElementName=label, Path=Visibility}" />
+    <TextBlock Name="label" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.Foreground="#FFFFFFFF" />
+  </Grid>
+</UserControl>

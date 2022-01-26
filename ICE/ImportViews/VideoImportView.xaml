@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="Microsoft.Research.ICE.ImportViews.VideoImportView" DataContext="{Binding VideoImport}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:controls="clr-namespace:Microsoft.Research.ICE.Controls" xmlns:converters="clr-namespace:Microsoft.Research.ICE.Converters" xmlns:toolkit="clr-namespace:Microsoft.Research.VisionTools.Toolkit.Desktop;assembly=Microsoft.Research.VisionTools.Toolkit.Desktop">
+  <UserControl.Resources>
+    <toolkit:TimeToTextConverter x:Key="timeToTextConverter" />
+    <converters:ObjectToVisibilityConverter x:Key="objectToVisibilityConverter" />
+  </UserControl.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="10" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="5" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <toolkit:VideoTrimmer Name="videoTrimmer" IsRotationEnabled="True" Source="{Binding MediaFilename}" RotationAngle="{Binding RotationAngle}" FramesPerSecond="{Binding FramesPerSecond, FallbackValue=30}" CurrentTime="{Binding CurrentTime, FallbackValue=0:0:3.78}" StartTime="{Binding StartTime, FallbackValue=0:0:1.47}" EndTime="{Binding EndTime, FallbackValue=0:0:8.43}" SelectedTimes="{Binding SelectedTimes}">
+      <controls:VideoRectangleOverlay x:Name="videoRectangleOverlay" VideoWidth="{Binding RawWidth}" VideoHeight="{Binding RawHeight}" />
+    </toolkit:VideoTrimmer>
+    <StackPanel Grid.Row="2" Orientation="Horizontal">
+      <Label Content="Preserve regions" FontSize="22" TextOptions.TextFormattingMode="Ideal" />
+      <Button Name="deleteButton" Content="Delete selected" Grid.Row="5" MinWidth="75" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0,0,1" Command="Delete" />
+    </StackPanel>
+    <Grid Name="rectangleArea" Grid.Row="4">
+      <ListBox Name="rectangleListBox" Height="125" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.PanningMode="HorizontalOnly" ItemsSource="{Binding VideoRectangles}" SelectionChanged="RectangleListBox_SelectionChanged">
+        <ListBox.ItemsPanel>
+          <ItemsPanelTemplate>
+            <VirtualizingStackPanel Orientation="Horizontal" />
+          </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+        <ListBox.ItemContainerStyle>
+          <Style TargetType="{x:Type ListBoxItem}" BasedOn="{x:Type ListBoxItem}">
+            <Setter Property="ListBoxItem.IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+          </Style>
+        </ListBox.ItemContainerStyle>
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+              </Grid.RowDefinitions>
+              <Border ClipToBounds="True" SnapsToDevicePixels="True">
+                <Image Width="80" Height="80" Stretch="Uniform" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderTransformOrigin="0.5,0.5" Source="{Binding Image}">
+                  <Image.RenderTransform>
+                    <RotateTransform Angle="{Binding ElementName=videoTrimmer, Path=AnimatedRotationAngle}" />
+                  </Image.RenderTransform>
+                </Image>
+              </Border>
+              <TextBlock TextBlock.TextAlignment="Center" Grid.Row="1" Margin="0,2,0,0" Text="{Binding Time, Converter={StaticResource timeToTextConverter}}" />
+            </Grid>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+      <TextBlock TextWrapping="Wrap" Opacity="0.8" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding VideoRectangles.Count, Converter={StaticResource objectToVisibilityConverter}, ConverterParameter=0}">
+        <Run FontWeight="Bold" Text="Optional:" /> <Run Text="Draw rectangles around regions of video frames that you want to appear in the final panorama." /></TextBlock>
+    </Grid>
+  </Grid>
+</UserControl>

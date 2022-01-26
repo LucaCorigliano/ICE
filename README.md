@@ -23,5 +23,5 @@ WIP - But use Visual Studio
 ### How to Install
 WIP - Installer not ready yet
 
-## How to use
+### How to use
 WIP
